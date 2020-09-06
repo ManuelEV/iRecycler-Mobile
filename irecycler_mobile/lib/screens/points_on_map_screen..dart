@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PlacesListScreen extends StatelessWidget {
+class PointOnMapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

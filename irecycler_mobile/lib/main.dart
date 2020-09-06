@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/add_place_screen.dart';
+import 'screens/add_point_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => AddPlaceScreen(),
+        '/': (context) => AddPointScreen(),
       },
     );
   }
