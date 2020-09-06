@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
+import 'package:irecycler_mobile/widgets/map_point_input.dart';
 
 class AddPointScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -35,6 +36,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
                 thickness: 2,
               ),
               _savePoint(),
+              LocationInput(),
             ],
           ),
         ),
