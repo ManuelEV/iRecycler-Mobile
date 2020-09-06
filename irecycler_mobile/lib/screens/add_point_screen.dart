@@ -9,6 +9,8 @@ class AddPointScreen extends StatefulWidget {
 }
 
 class _AddPointScreenState extends State<AddPointScreen> {
+  TextEditingController _pointName = TextEditingController();
+  TextEditingController _pointDescription = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,18 +18,25 @@ class _AddPointScreenState extends State<AddPointScreen> {
         title: Text('Añade un nuevo punto de reciclaje'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-            PointImage(),
-            _addPointName(),
-            _addDescription(),
-            _coordinatesBtn(),
-            Divider(
-              color: Colors.grey,
-              thickness: 2,
-            ),
-            _keywords(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              PointImage(),
+              _addPointName(),
+              _addDescription(),
+              _coordinatesBtn(),
+              Divider(
+                color: Colors.grey,
+                thickness: 2,
+              ),
+              _keywords(),
+              Divider(
+                color: Colors.grey,
+                thickness: 2,
+              ),
+              _savePoint(),
+            ],
+          ),
         ),
       ),
     );
@@ -42,38 +51,47 @@ class _AddPointScreenState extends State<AddPointScreen> {
   }
 
   Widget _addPointName() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Nombre del lugar'),
-        IconButton(
-          visualDensity: VisualDensity.comfortable,
-          icon: Icon(Icons.edit),
-          tooltip: 'Nombre lugar',
-          onPressed: () {},
+    return Container(
+      width: 200,
+      child: TextFormField(
+        textAlign: TextAlign.center,
+        controller: _pointName,
+        decoration: InputDecoration(
+          suffixIcon: Icon(Icons.edit),
+          hintText: 'Nombre del punto',
         ),
-      ],
+      ),
     );
   }
 
   Widget _addDescription() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Descripción'),
-        IconButton(
-          visualDensity: VisualDensity.comfortable,
-          icon: Icon(Icons.edit),
-          tooltip: 'Nombre lugar',
-          onPressed: () {},
+    return Container(
+      margin: EdgeInsets.all(5),
+      width: 200,
+      child: TextFormField(
+        textAlign: TextAlign.center,
+        controller: _pointDescription,
+        decoration: InputDecoration(
+          suffixIcon: Icon(Icons.edit),
+          hintText: 'Descripción ...',
         ),
-      ],
+      ),
     );
   }
 
   Widget _keywords() {
     return Container(
       child: Text('Keywords'),
+    );
+  }
+
+  Widget _savePoint() {
+    return Container(
+      child: RaisedButton(
+        color: Colors.green,
+        child: Text('Agregar punto'),
+        onPressed: () => {},
+      ),
     );
   }
 }

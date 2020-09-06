@@ -38,11 +38,14 @@ class _PointImageState extends State<PointImage> {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: DecorationImage(
-            image: NetworkImage(
-                'https://media-cdn.tripadvisor.com/media/photo-s/0b/71/10/23/hachiko.jpg'),
-            fit: BoxFit.fill),
       ),
+      child: _storedImage != null
+          ? Image.file(
+              _storedImage,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            )
+          : Text('No hay una imagen'),
     );
   }
 
