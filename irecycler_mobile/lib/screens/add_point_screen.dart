@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irecycler_mobile/screens/select_point_map_screen.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
 
@@ -25,7 +26,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
               PointImage(),
               _addPointName(),
               _addDescription(),
-              _coordinatesBtn(),
+              _showMapBtn(context),
               Divider(
                 color: Colors.grey,
                 thickness: 2,
@@ -36,7 +37,6 @@ class _AddPointScreenState extends State<AddPointScreen> {
                 thickness: 2,
               ),
               _savePoint(),
-              LocationInput(),
             ],
           ),
         ),
@@ -44,11 +44,16 @@ class _AddPointScreenState extends State<AddPointScreen> {
     );
   }
 
-  Widget _coordinatesBtn() {
+  Widget _showMapBtn(context) {
     return RaisedButton.icon(
       icon: Icon(Icons.location_on),
-      label: Text('Fijar ubicación'),
-      onPressed: () {},
+      label: Text('Seleccionar ubicación'),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MapScreen()),
+        );
+      },
     );
   }
 

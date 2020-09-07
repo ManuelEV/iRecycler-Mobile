@@ -18,11 +18,17 @@ class _LocationInputState extends State<LocationInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FlatButton.icon(
-        label: Text('sadasd'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Seleccione en mapa'),
+      ),
+      body: FloatingActionButton(
+        backgroundColor: Colors.grey[200],
+        child: Icon(
+          Icons.gps_fixed,
+          color: Colors.black,
+        ),
         onPressed: _getCurrentLocation,
-        icon: Icon(Icons.headset),
       ),
     );
   }
