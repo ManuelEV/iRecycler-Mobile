@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:irecycler_mobile/screens/select_point_map_screen.dart';
+import 'package:irecycler_mobile/models/point.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
 
@@ -13,6 +13,19 @@ class AddPointScreen extends StatefulWidget {
 class _AddPointScreenState extends State<AddPointScreen> {
   TextEditingController _pointName = TextEditingController();
   TextEditingController _pointDescription = TextEditingController();
+
+  PlaceLocation _pickedLocation;
+
+  void _selectPlace(double lat, double lng) {
+    _pickedLocation = PlaceLocation(longitude: lng, latitude: lat);
+  }
+
+  void _savePlace() {
+    if (_pointName.text.isEmpty || _pickedLocation == null) {
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +39,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
               PointImage(),
               _addPointName(),
               _addDescription(),
-              _showMapBtn(context),
+              LocationInput(_selectPlace),
               Divider(
                 color: Colors.grey,
                 thickness: 2,
@@ -41,19 +54,6 @@ class _AddPointScreenState extends State<AddPointScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _showMapBtn(context) {
-    return RaisedButton.icon(
-      icon: Icon(Icons.location_on),
-      label: Text('Seleccionar ubicación'),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MapScreen()),
-        );
-      },
     );
   }
 
