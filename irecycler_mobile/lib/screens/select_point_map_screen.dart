@@ -17,6 +17,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
+
   void _selectLocation(LatLng position) {
     setState(() {
       _pickedLocation = position;
@@ -28,6 +29,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Maps'),
+        // Botón para confirmar el punto seleccionado en el mapa
         actions: [
           if (widget.isSelecting)
             IconButton(

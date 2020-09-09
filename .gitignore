@@ -2,3 +2,5 @@
 irecycler_mobile/secrets.json
 
 irecycler_mobile/android/app/src/main/AndroidManifest.xml
+
+irecycler_mobile/android/app/google-services.json

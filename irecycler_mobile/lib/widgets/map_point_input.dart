@@ -35,19 +35,20 @@ class _LocationInputState extends State<LocationInput> {
     if (selectedLocation == null) {
       return;
     }
+    print('Latitud: ' + selectedLocation.latitude.toString());
+    print('Longitud: ' + selectedLocation.longitude.toString());
     widget.onSelectPlace(selectedLocation.latitude, selectedLocation.longitude);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FloatingActionButton(
-        backgroundColor: Colors.grey[200],
-        child: Icon(
-          Icons.gps_fixed,
-          color: Colors.black,
-        ),
+      child: RaisedButton.icon(
+        icon: Icon(Icons.location_on),
+        textColor: Colors.white,
+        label: Text('Seleccionar ubicación'),
         onPressed: _selectOnMap,
+        color: Colors.deepPurple[400],
       ),
     );
   }

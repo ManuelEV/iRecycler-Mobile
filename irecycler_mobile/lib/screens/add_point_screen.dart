@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
+import 'dart:io';
 
 class AddPointScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -15,15 +16,21 @@ class _AddPointScreenState extends State<AddPointScreen> {
   TextEditingController _pointDescription = TextEditingController();
 
   PlaceLocation _pickedLocation;
+  File _pointImage;
 
   void _selectPlace(double lat, double lng) {
     _pickedLocation = PlaceLocation(longitude: lng, latitude: lat);
   }
 
   void _savePlace() {
-    if (_pointName.text.isEmpty || _pickedLocation == null) {
+    if (_pointName.text.isEmpty ||
+        _pointDescription.text.isEmpty ||
+        _pointImage == null ||
+        _pickedLocation == null) {
       return;
     }
+
+    //Guardar en firebase?
   }
 
   @override
