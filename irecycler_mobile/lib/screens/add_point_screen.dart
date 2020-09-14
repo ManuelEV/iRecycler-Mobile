@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
+import 'package:irecycler_mobile/services/auth.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
 import 'dart:io';
 
+import 'drawer_page.dart';
+
 class AddPointScreen extends StatefulWidget {
   static const routeName = '/add-place';
+  
 
   @override
   _AddPointScreenState createState() => _AddPointScreenState();
@@ -33,12 +37,25 @@ class _AddPointScreenState extends State<AddPointScreen> {
     //Guardar en firebase?
   }
 
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Añade un nuevo punto de reciclaje'),
+        elevation: 0.0,
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('logout'),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            )
+          ],
       ),
+      drawer: DrawerPage(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

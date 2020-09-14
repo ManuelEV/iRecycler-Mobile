@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:irecycler_mobile/models/point.dart';
+import 'package:irecycler_mobile/services/auth.dart';
 
 class MapScreen extends StatefulWidget {
+  static const routeName = '/map-screen';
   final PlaceLocation initialLocation;
   final bool isSelecting;
 
@@ -18,6 +20,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
 
+  final AuthService _auth = AuthService();
+
   void _selectLocation(LatLng position) {
     setState(() {
       _pickedLocation = position;
@@ -29,6 +33,16 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Maps'),
+        elevation: 0.0,
+        actions: <Widget>[
+          FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('logout'),
+            onPressed: () async {
+              await _auth.signOut();
+            },
+          )
+        ],
         // Botón para confirmar el punto seleccionado en el mapa
         actions: [
           if (widget.isSelecting)
