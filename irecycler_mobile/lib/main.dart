@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/user.dart';
-import 'package:irecycler_mobile/screens/home.dart';
 import 'package:irecycler_mobile/routes/routes.dart';
 import 'package:irecycler_mobile/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +18,8 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         home: Wrapper(),
+        initialRoute: Wrapper.routeName,
+        routes: getRoutes()
       )
     );
     /*return MaterialApp(

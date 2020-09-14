@@ -5,6 +5,9 @@ import 'package:irecycler_mobile/auth/authenticate.dart';
 import 'package:irecycler_mobile/screens/home.dart';
 
 class Wrapper extends StatelessWidget {
+
+  static String routeName = '/';
+
   @override
   Widget build(BuildContext context) {
 

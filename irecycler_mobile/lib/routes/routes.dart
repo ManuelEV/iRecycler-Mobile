@@ -11,5 +11,6 @@ Map<String, WidgetBuilder> getRoutes(){
     PointOnMapScreen.routeName: (context) => PointOnMapScreen(),
     MapScreen.routeName: (context) => MapScreen(),
     HomePage.routeName: (context) => HomePage(),
+    //Wrapper.routeName: (context) => HomePage(),
   };
 }

@@ -5,7 +5,7 @@ import 'package:irecycler_mobile/services/auth.dart';
 
 class HomePage extends StatelessWidget{
 
-  static String routeName = '';
+  static String routeName = '/home-page';
 
   final AuthService _auth = AuthService();
 

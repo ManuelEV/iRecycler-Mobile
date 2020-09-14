@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irecycler_mobile/screens/home.dart';
 import 'package:irecycler_mobile/screens/points_on_map_screen..dart';
 import 'package:irecycler_mobile/screens/select_point_map_screen.dart';
 
@@ -26,6 +27,11 @@ class DrawerPage extends StatelessWidget{
                 color: Colors.white,
               )
               )
+          ),
+          ListTile(
+            title: Text('Home'),
+            leading: Icon(Icons.perm_contact_calendar),
+            onTap: () => Navigator.pushNamed(context, HomePage.routeName),
           ),
           ListTile(
             title: Text('Agregar punto'),

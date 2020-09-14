@@ -43,18 +43,6 @@ class _MapScreenState extends State<MapScreen> {
             },
           )
         ],
-        // Botón para confirmar el punto seleccionado en el mapa
-        actions: [
-          if (widget.isSelecting)
-            IconButton(
-              icon: Icon(Icons.check),
-              onPressed: _pickedLocation == null
-                  ? null
-                  : () {
-                      Navigator.of(context).pop(_pickedLocation);
-                    },
-            ),
-        ],
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
