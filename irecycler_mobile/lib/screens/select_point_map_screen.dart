@@ -41,10 +41,7 @@ class _MapScreenState extends State<MapScreen> {
             onPressed: () async {
               await _auth.signOut();
             },
-          )
-        ],
-        // Botón para confirmar el punto seleccionado en el mapa
-        actions: [
+          ),
           if (widget.isSelecting)
             IconButton(
               icon: Icon(Icons.check),
