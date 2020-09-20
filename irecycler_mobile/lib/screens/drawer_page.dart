@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/screens/home.dart';
+import 'package:irecycler_mobile/screens/my_points_screen.dart';
 import 'package:irecycler_mobile/screens/points_on_map_screen..dart';
 import 'package:irecycler_mobile/screens/select_point_map_screen.dart';
 
@@ -47,6 +48,11 @@ class DrawerPage extends StatelessWidget{
             title: Text('Puntos en el mapa'),
             leading: Icon(Icons.card_membership),
             onTap: () => Navigator.pushNamed(context, PointOnMapScreen.routeName),
+          ),
+          ListTile(
+            title: Text('Mis puntos'),
+            leading: Icon(Icons.card_membership),
+            onTap: () => Navigator.pushNamed(context, MyPointsScreen.routeName),
           ),
           /* ListTile(
             title: Text('Salir'),

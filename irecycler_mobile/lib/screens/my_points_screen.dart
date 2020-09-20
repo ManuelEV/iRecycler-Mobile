@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'dart:io';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/widgets/graph_widget.dart';
 
 class MyPointsScreen extends StatefulWidget {
