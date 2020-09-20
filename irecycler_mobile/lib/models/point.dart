@@ -12,6 +12,7 @@ class Place {
   final String id;
   final String title;
   final String description;
+  final int filled;
   final PlaceLocation location;
   final File image;
 
@@ -19,6 +20,7 @@ class Place {
       {@required this.id,
       @required this.description,
       @required this.title,
+      @required this.filled,
       @required this.location,
       @required this.image});
 }
