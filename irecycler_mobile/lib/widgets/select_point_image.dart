@@ -14,7 +14,7 @@ class _PointImageState extends State<PointImage> {
     final picker = ImagePicker();
     final imageFile = await picker.getImage(
       source: ImageSource.camera,
-      maxHeight: 600,
+      maxHeight: 1000,
     );
     setState(() {
       _storedImage = File(imageFile.path);
@@ -26,36 +26,69 @@ class _PointImageState extends State<PointImage> {
     return Column(
       children: <Widget>[
         _showPointImage(),
-        _addPointImage(),
+        //_addPointImage(),
       ],
     );
   }
 
   Widget _showPointImage() {
     return Container(
-      width: 200,
-      height: 200,
+      width: 250,
+      height: 250,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-      ),
       child: _storedImage != null
-          ? Image.file(
-              _storedImage,
-              fit: BoxFit.cover,
-              width: double.infinity,
+          ? Stack(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    image: DecorationImage(
+                      image: FileImage(_storedImage),
+                      fit: BoxFit.values[2],
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(125),
+                    ),
+                  ),
+                  child: null,
+                ),
+                _addPointImage(true),
+              ],
             )
-          : Text('No hay una imagen'),
+          : Stack(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    image: DecorationImage(
+                      image: AssetImage('default-pick-image.jpg'),
+                      fit: BoxFit.fill,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(130),
+                    ),
+                  ),
+                  child: null,
+                ),
+                _addPointImage(false),
+              ],
+            ),
     );
   }
 
-  Widget _addPointImage() {
+  Widget _addPointImage(bool isPicked) {
     return Container(
       alignment: Alignment.center,
-      child: RaisedButton.icon(
-        icon: Icon(Icons.add_a_photo),
-        label: Text('Picture'),
+      child: FlatButton(
+        child: Icon(
+          Icons.add_a_photo,
+          color: isPicked ? Colors.grey[300] : Colors.grey[600],
+        ),
+        textColor: isPicked ? Colors.grey[300] : Colors.grey[600],
         onPressed: _takePicture,
+        color: isPicked ? Colors.transparent : Colors.grey[200],
       ),
     );
   }

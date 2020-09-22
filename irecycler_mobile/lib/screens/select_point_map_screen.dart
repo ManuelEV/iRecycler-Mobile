@@ -35,13 +35,13 @@ class _MapScreenState extends State<MapScreen> {
         title: Text('Maps'),
         elevation: 0.0,
         actions: <Widget>[
-          FlatButton.icon(
+          /* FlatButton.icon(
             icon: Icon(Icons.person),
             label: Text('logout'),
             onPressed: () async {
               await _auth.signOut();
             },
-          ),
+          ), */
           if (widget.isSelecting)
             IconButton(
               icon: Icon(Icons.check),

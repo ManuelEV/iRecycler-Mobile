@@ -9,7 +9,6 @@ import 'drawer_page.dart';
 
 class AddPointScreen extends StatefulWidget {
   static const routeName = '/add-place';
-  
 
   @override
   _AddPointScreenState createState() => _AddPointScreenState();
@@ -45,15 +44,15 @@ class _AddPointScreenState extends State<AddPointScreen> {
       appBar: AppBar(
         title: Text('Añade un nuevo punto de reciclaje'),
         elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            )
-          ],
+        actions: <Widget>[
+          /*  FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('logout'),
+            onPressed: () async {
+              await _auth.signOut();
+            },
+          ) */
+        ],
       ),
       drawer: DrawerPage(),
       body: Center(
