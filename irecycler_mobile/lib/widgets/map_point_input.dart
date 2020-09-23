@@ -47,7 +47,7 @@ class _LocationInputState extends State<LocationInput> {
         textColor: Colors.white,
         label: Text('Seleccionar ubicación'),
         onPressed: _selectOnMap,
-        color: Colors.deepPurple[400],
+        color: Colors.indigo,
       ),
     );
   }

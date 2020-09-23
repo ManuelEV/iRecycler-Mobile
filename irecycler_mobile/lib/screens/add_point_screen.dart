@@ -111,15 +111,79 @@ class _AddPointScreenState extends State<AddPointScreen> {
 
   Widget _keywords() {
     return Container(
-      child: Text('Keywords'),
+      width: 400,
+      height: 75,
+      child: GridView(
+        padding: EdgeInsets.all(5),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 2,
+            crossAxisCount: 5,
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 1),
+        children: [
+          Card(
+            child: Text('Ufro'),
+          ),
+          Card(
+            child: Text('Temuco'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag2'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag2'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag2'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag2'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          Card(
+            child: Text('Tag1'),
+          ),
+          FloatingActionButton(
+            onPressed: null,
+            elevation: 0,
+            isExtended: true,
+            backgroundColor: Colors.purple[300],
+            child: Icon(Icons.add),
+          )
+        ],
+      ),
     );
   }
 
   Widget _savePoint() {
     return Container(
       child: RaisedButton(
-        color: Colors.green,
+        color: Colors.indigo,
         child: Text('Agregar punto'),
+        textColor: Colors.white,
         onPressed: () => {},
       ),
     );
