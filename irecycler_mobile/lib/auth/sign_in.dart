@@ -35,6 +35,7 @@ class _SignInState extends State<SignIn> {
           FlatButton.icon(
             icon: Icon(Icons.person),
             label: Text('Registrarse'),
+            textColor: Colors.white,
             onPressed: () => widget.toggleView(),
           ),
         ],
@@ -47,7 +48,11 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'email'),
+                decoration: const InputDecoration(
+                  hintText: 'email',
+                  icon: Icon(Icons.mail)
+                ),
+                //textInputDecoration.copyWith(hintText: 'email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -56,7 +61,11 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
-                decoration: textInputDecoration.copyWith(hintText: 'password'),
+                decoration: const InputDecoration(
+                  hintText: 'password',
+                  icon: Icon(Icons.security)
+                ),
+                //textInputDecoration.copyWith(hintText: 'password'),
                 validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
                   setState(() => password = val);

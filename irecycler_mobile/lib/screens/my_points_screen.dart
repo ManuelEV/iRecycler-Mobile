@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'dart:io';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:irecycler_mobile/screens/drawer_page.dart';
 import 'package:irecycler_mobile/widgets/graph_widget.dart';
 
 class MyPointsScreen extends StatefulWidget {
@@ -75,6 +76,7 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
         ],
         title: Text('Mis puntos de reciclaje'),
       ),
+      drawer: DrawerPage(),
       body: ListView.builder(
         itemCount: this.points.length,
         itemBuilder: (context, index) {
