@@ -28,7 +28,6 @@ class _SignInState extends State<SignIn> {
     return loading ? Loading() : Scaffold(
       //backgroundColor: Colors.brown[100],
       appBar: AppBar(
-        backgroundColor: Colors.blue[400],
         elevation: 0.0,
         title: Text('Ingresa a iRecycler'),
         actions: <Widget>[

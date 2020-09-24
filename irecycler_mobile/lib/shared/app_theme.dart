@@ -6,10 +6,11 @@ class AppTheme {
  
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.red,
+    primaryColor: Colors.teal[400],
   );
  
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    primaryColor: Colors.teal[400]
   );
 }
