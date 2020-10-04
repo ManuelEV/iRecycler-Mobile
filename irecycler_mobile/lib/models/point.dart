@@ -32,6 +32,9 @@ class Place {
       'placeId': id,
       'title': title,
       'imageUrl': image,
+      'description':description,
+      'filled':filled,
+      'location':location,
     };
   }
 
@@ -41,6 +44,9 @@ class Place {
     return Place(
       title: map['title'],
       image: map['imageUrl'],
+      description: map['description'],
+      filled: map['filled'],
+      location: map['location'],
       id: map['placeId'],
       documentId: documentId,
     );
