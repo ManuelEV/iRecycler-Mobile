@@ -15,6 +15,8 @@ class Place {
   final int filled;
   final PlaceLocation location;
   final File image;
+  final String documentId;
+
 
   Place(
       {@required this.id,
@@ -22,5 +24,26 @@ class Place {
       @required this.title,
       @required this.filled,
       @required this.location,
-      @required this.image});
+      @required this.image,
+      @required this.documentId});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'placeId': id,
+      'title': title,
+      'imageUrl': image,
+    };
+  }
+
+  static Place fromMap(Map<String, dynamic> map, String documentId) {
+    if (map == null) return null;
+
+    return Place(
+      title: map['title'],
+      image: map['imageUrl'],
+      id: map['placeId'],
+      documentId: documentId,
+    );
+  }
+  
 }
