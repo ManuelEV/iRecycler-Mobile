@@ -45,7 +45,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
     point.filled = Random.secure().nextInt(100);
     print(point.toMap());
     fS.addPlace(point);
-    //Guardar en firebase?
+    //Se guarda en firebase
   }
 
   final AuthService _auth = AuthService();
