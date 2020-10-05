@@ -15,6 +15,7 @@ class FirestoreService {
     try {
       await _pointsCollectionReference.add(point.toMap());
     } catch (e) {
+      print(e.toString());
       // TODO: Find or create a way to repeat error handling without so much repeated code
       if (e is PlatformException) {
         return e.message;

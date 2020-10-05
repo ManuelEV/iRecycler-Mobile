@@ -6,35 +6,40 @@ class PlaceLocation {
   final double latitude;
 
   const PlaceLocation({@required this.longitude, @required this.latitude});
+  Map<String, dynamic> toMap() {
+    return {
+      'longitude': longitude,
+      'latitude': latitude,
+    };
+  }
 }
 
 class Place {
-  final String id;
+  String id;
   final String title;
   final String description;
-  final int filled;
+  int filled;
   final PlaceLocation location;
   final File image;
   final String documentId;
 
-
   Place(
-      {@required this.id,
+      {this.id,
       @required this.description,
       @required this.title,
-      @required this.filled,
+      this.filled,
       @required this.location,
-      @required this.image,
-      @required this.documentId});
+      this.image,
+      this.documentId});
 
   Map<String, dynamic> toMap() {
     return {
       'placeId': id,
       'title': title,
-      'imageUrl': image,
-      'description':description,
-      'filled':filled,
-      'location':location,
+      'image': image,
+      'description': description,
+      'filled': filled,
+      'location': location.toMap(),
     };
   }
 
@@ -43,7 +48,7 @@ class Place {
 
     return Place(
       title: map['title'],
-      image: map['imageUrl'],
+      image: map['image'],
       description: map['description'],
       filled: map['filled'],
       location: map['location'],
@@ -51,5 +56,4 @@ class Place {
       documentId: documentId,
     );
   }
-  
 }
