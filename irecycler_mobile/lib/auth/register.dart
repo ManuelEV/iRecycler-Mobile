@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:irecycler_mobile/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/shared/constants.dart';
@@ -29,19 +30,64 @@ class _RegisterState extends State<Register> {
       //backgroundColor: Colors.brown[100],
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Registrarse a iRecycler'),
+        title: Text('Regístrate en iRecycler'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Login'),
+            label: Text('Ingresar'),
             textColor: Colors.white,
             onPressed: () => widget.toggleView(),
           ),
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
+        child: Column(children: <Widget>[_signUpForm(), _signUpImage()])),
+    );
+  }
+
+  Widget _signUpImage() {
+    return AspectRatio(
+        aspectRatio: 16 / 9,
+        child: LayoutBuilder(
+          builder: (_, constraints){
+            return Container(
+              //color: Colors.red,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset(
+                      'assets/images/nature/sun.svg',
+                      width: constraints.maxWidth*1.0
+                    )
+                    )
+                  ),
+                  Positioned(
+                    left: 0.0,
+                    child: SvgPicture.asset(
+                      'assets/images/nature/sprout.svg',
+                      width: constraints.maxWidth*0.28  
+                    )
+                  ),
+                  Positioned(
+                    right: 0.0,
+                    child: SvgPicture.asset(
+                      'assets/images/recycle/recycling.svg',
+                      width: constraints.maxWidth*0.28  
+                    )
+                  )
+                ]
+              )
+            );
+          }
+        ));
+  }
+
+  Widget _signUpForm() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+      child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
@@ -96,7 +142,7 @@ class _RegisterState extends State<Register> {
             ],
           ),
         ),
-      ),
     );
   }
+
 }
