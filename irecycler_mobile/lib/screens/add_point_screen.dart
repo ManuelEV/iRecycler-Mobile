@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'package:irecycler_mobile/services/auth.dart';
+import 'package:irecycler_mobile/services/points_service.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
 import 'dart:io';
@@ -20,20 +23,29 @@ class _AddPointScreenState extends State<AddPointScreen> {
 
   PlaceLocation _pickedLocation;
   File _pointImage;
+  FirestoreService fS = FirestoreService();
+
 
   void _selectPlace(double lat, double lng) {
     _pickedLocation = PlaceLocation(longitude: lng, latitude: lat);
   }
 
   void _savePlace() {
+    
     if (_pointName.text.isEmpty ||
         _pointDescription.text.isEmpty ||
-        _pointImage == null ||
+        //_pointImage == null ||
         _pickedLocation == null) {
       return;
     }
-
-    //Guardar en firebase?
+    print('toma datos');
+    Place point = Place(description: _pointDescription.text, title: _pointName.text, location: _pickedLocation, 
+    //image: _pointImage
+    );
+    point.filled = Random.secure().nextInt(100);
+    print(point.toMap());
+    fS.addPlace(point);
+    //Se guarda en firebase
   }
 
   final AuthService _auth = AuthService();
@@ -184,7 +196,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
         color: Colors.indigo,
         child: Text('Agregar punto'),
         textColor: Colors.white,
-        onPressed: () => {},
+        onPressed: () => {_savePlace()},
       ),
     );
   }
