@@ -53,8 +53,9 @@ class DrawerPage extends StatelessWidget {
       ),
       Divider(),
       ListTile(
-        title: Text('Logout'),
-        leading: Icon(Icons.logout),
+        title: Text('Salir de iRecycler'),
+        
+        leading: Icon(Icons.logout, color: Colors.red),
         onTap: () async {
           Navigator.pushReplacementNamed(context, Wrapper.routeName);
           await _auth.signOut();
