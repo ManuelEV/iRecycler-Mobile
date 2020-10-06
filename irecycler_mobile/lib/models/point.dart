@@ -12,6 +12,13 @@ class PlaceLocation {
       'latitude': latitude,
     };
   }
+
+  static PlaceLocation fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+
+    return PlaceLocation(latitude: map['latitude'],longitude: map['longitude']
+    );
+  }
 }
 
 class Place {
