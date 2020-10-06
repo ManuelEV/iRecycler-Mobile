@@ -37,7 +37,6 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
       description: 'adsdasdasd',
       location: PlaceLocation(longitude: 3.123, latitude: 22.33),
       filled: 50,
-      image: File('asdasd'),
     ),
     Place(
       id: '2',
@@ -45,16 +44,13 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
       filled: 75,
       description: 'adsdasdasd',
       location: PlaceLocation(longitude: 3.123, latitude: 22.33),
-      image: File('asdasd'),
     ),
     Place(
-      id: '3',
-      title: 'Punto 3',
-      filled: 89,
-      description: 'adsdasdasd',
-      location: PlaceLocation(longitude: 3.123, latitude: 22.33),
-      image: File('asdasd'),
-    ),
+        id: '3',
+        title: 'Punto 3',
+        filled: 89,
+        description: 'adsdasdasd',
+        location: PlaceLocation(longitude: 3.123, latitude: 22.33)),
   ];
   @override
   Widget build(BuildContext context) {

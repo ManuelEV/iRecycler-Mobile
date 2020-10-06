@@ -37,9 +37,9 @@ class DrawerPage extends StatelessWidget {
         onTap: () => Navigator.pushNamed(context, AddPointScreen.routeName),
       ),
       ListTile(
-        title: Text('Mapa'),
+        title: Text('Puntos en el mapa'),
         leading: Icon(Icons.map),
-        onTap: () => Navigator.pushNamed(context, MapScreen.routeName),
+        onTap: () => Navigator.pushNamed(context, PointOnMapScreen.routeName),
       ),
       /*ListTile(
             title: Text('Puntos en el mapa'),
@@ -54,7 +54,6 @@ class DrawerPage extends StatelessWidget {
       Divider(),
       ListTile(
         title: Text('Salir de iRecycler'),
-        
         leading: Icon(Icons.logout, color: Colors.red),
         onTap: () async {
           Navigator.pushReplacementNamed(context, Wrapper.routeName);

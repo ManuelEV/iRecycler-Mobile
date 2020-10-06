@@ -1,20 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/services/auth.dart';
-
+import 'package:irecycler_mobile/models/point.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'drawer_page.dart';
 
 class PointOnMapScreen extends StatelessWidget {
   static const routeName = '/points-on-map';
+  final PlaceLocation initialLocation;
+  PointOnMapScreen({
+    this.initialLocation =
+        const PlaceLocation(latitude: -38.73965, longitude: -72.59842),
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lugares agregados"),
-        elevation: 0.0
+        title: Text('Puntos en el mapa'),
+        elevation: 0.0,
       ),
       drawer: DrawerPage(),
-      //TODO: agregar el mapa de puntos
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(initialLocation.latitude, initialLocation.longitude),
+          zoom: 13,
+        ),
+        //myLocationButtonEnabled: true,
+
+        myLocationEnabled: true,
+        onTap: null,
+      ),
     );
   }
 }
+/*  void _getPoint(){
+    var points = fS.getPlacesOnceOff();
+    if(docs.documents.isNotEmpty){
+      for(int i= 0; i < docs.documents.length; i++) {
+        initMarker(docs.documents[i].data, docs.documents[i].documentID);
+      }
+    }} */

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'package:irecycler_mobile/services/auth.dart';
-
+import 'package:irecycler_mobile/services/points_service.dart';
 import 'drawer_page.dart';
 
 class MapScreen extends StatefulWidget {
@@ -21,6 +21,8 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
+  FirestoreService fS = FirestoreService();
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
   void _selectLocation(LatLng position) {
     setState(() {
@@ -60,10 +62,7 @@ class _MapScreenState extends State<MapScreen> {
         markers: _pickedLocation == null
             ? null
             : {
-                Marker(
-                  markerId: MarkerId('m1'),
-                  position: _pickedLocation,
-                ),
+                Marker(markerId: MarkerId('m1'), position: _pickedLocation),
               },
       ),
     );
