@@ -27,8 +27,9 @@ class Place {
   final String description;
   int filled;
   final PlaceLocation location;
-  final File image;
+  final String image;
   final String documentId;
+  String userId;
 
   Place(
       {this.id,
@@ -37,7 +38,8 @@ class Place {
       this.filled,
       @required this.location,
       this.image,
-      this.documentId});
+      this.documentId,
+      this.userId});
 
   Map<String, dynamic> toMap() {
     return {
@@ -47,6 +49,7 @@ class Place {
       'description': description,
       'filled': filled,
       'location': location.toMap(),
+      'userId': userId
     };
   }
 
@@ -60,6 +63,7 @@ class Place {
       filled: map['filled'],
       location: map['location'],
       id: map['placeId'],
+      userId: map['userId'],
       documentId: documentId,
     );
   }
