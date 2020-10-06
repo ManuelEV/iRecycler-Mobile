@@ -1,11 +1,16 @@
 import 'dart:math';
 
+import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
+import 'package:irecycler_mobile/models/user.dart';
 import 'package:irecycler_mobile/services/auth.dart';
 import 'package:irecycler_mobile/services/points_service.dart';
 import 'package:irecycler_mobile/widgets/select_point_image.dart';
 import 'package:irecycler_mobile/widgets/map_point_input.dart';
+import 'package:provider/provider.dart';
+import 'package:path/path.dart' as Path;  
+
 import 'dart:io';
 
 import 'drawer_page.dart';
@@ -23,29 +28,50 @@ class _AddPointScreenState extends State<AddPointScreen> {
 
   PlaceLocation _pickedLocation;
   File _pointImage;
+  String _uploadedFileURL;
   FirestoreService fS = FirestoreService();
-
 
   void _selectPlace(double lat, double lng) {
     _pickedLocation = PlaceLocation(longitude: lng, latitude: lat);
   }
 
+  void _selectImage(File picture) {
+    _pointImage = picture;
+  }
+
   void _savePlace() {
-    
     if (_pointName.text.isEmpty ||
         _pointDescription.text.isEmpty ||
-        //_pointImage == null ||
+        _pointImage == null ||
         _pickedLocation == null) {
       return;
     }
     print('toma datos');
-    Place point = Place(description: _pointDescription.text, title: _pointName.text, location: _pickedLocation, 
-    //image: _pointImage
+    Place point = Place(
+      description: _pointDescription.text,
+      title: _pointName.text,
+      location: _pickedLocation,
+      //image: _pointImage
     );
+    uploadFile();
     point.filled = Random.secure().nextInt(100);
     print(point.toMap());
     fS.addPlace(point);
     //Se guarda en firebase
+  }
+
+  Future uploadFile() async {
+    StorageReference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('points/${Path.basename(_pointImage.path)}}');
+    StorageUploadTask uploadTask = storageReference.putFile(_pointImage);
+    await uploadTask.onComplete;
+    print('File Uploaded');
+    storageReference.getDownloadURL().then((fileURL) {
+      setState(() {
+        _uploadedFileURL = fileURL;
+      });
+    });
   }
 
   final AuthService _auth = AuthService();
@@ -71,7 +97,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PointImage(),
+              PointImage(_selectImage),
               _addPointName(),
               _addDescription(),
               LocationInput(_selectPlace),

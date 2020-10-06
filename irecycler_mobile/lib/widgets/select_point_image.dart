@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class PointImage extends StatefulWidget {
+  final Function onSelectImage;
+  PointImage(this.onSelectImage);
+
   @override
   _PointImageState createState() => _PointImageState();
 }
@@ -18,6 +21,7 @@ class _PointImageState extends State<PointImage> {
     );
     setState(() {
       _storedImage = File(imageFile.path);
+      widget.onSelectImage(_storedImage);
     });
   }
 
