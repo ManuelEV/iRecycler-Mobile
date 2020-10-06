@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // For File Upload To Firestore
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
@@ -39,23 +40,24 @@ class _AddPointScreenState extends State<AddPointScreen> {
     _pointImage = picture;
   }
 
-  void _savePlace() {
+  Future<void> _savePlace() async {
     if (_pointName.text.isEmpty ||
         _pointDescription.text.isEmpty ||
         _pointImage == null ||
         _pickedLocation == null) {
       return;
     }
-    print('toma datos');
+    uploadFile();
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final uid = user.uid;
     Place point = Place(
       description: _pointDescription.text,
       title: _pointName.text,
       location: _pickedLocation,
-      //image: _pointImage
+      image: _uploadedFileURL,
+      userId: uid
     );
-    uploadFile();
     point.filled = Random.secure().nextInt(100);
-    print(point.toMap());
     fS.addPlace(point);
     //Se guarda en firebase
   }
@@ -63,13 +65,14 @@ class _AddPointScreenState extends State<AddPointScreen> {
   Future uploadFile() async {
     StorageReference storageReference = FirebaseStorage.instance
         .ref()
-        .child('points/${Path.basename(_pointImage.path)}}');
+        .child('points/${Path.basename(_pointImage.path)}');
     StorageUploadTask uploadTask = storageReference.putFile(_pointImage);
     await uploadTask.onComplete;
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
       setState(() {
         _uploadedFileURL = fileURL;
+        print(fileURL);
       });
     });
   }
