@@ -35,7 +35,6 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {
       _markers.clear();
       for (final point in pointsResults) {
-        print('Punto X:' + point.toString());
         var marker = Marker(
           markerId: MarkerId(point.title),
           position: LatLng(point.location.latitude, point.location.longitude),
@@ -45,7 +44,6 @@ class _MapScreenState extends State<MapScreen> {
           ),
         );
         _markers[point.title] = marker;
-        print('size:' + _markers.length.toString());
       }
     });
   }
