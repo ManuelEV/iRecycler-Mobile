@@ -82,11 +82,11 @@ class FirestoreService {
 
   Future getPlacesByUser(String userId) async {
     try {
-      var pointDocumentSnapshot = await _pointsCollectionReference.getDocuments();
+      var pointDocumentSnapshot = await _pointsCollectionReference.where('userId', isEqualTo: userId).getDocuments();
       if (pointDocumentSnapshot.documents.isNotEmpty) {
         return pointDocumentSnapshot.documents
             .map((snapshot) => Place.fromMap(snapshot.data, snapshot.documentID))
-            .where((mappedItem) => mappedItem.userId == userId)
+            .where((mappedItem) => mappedItem.title != null)
             .toList();
       }
     } catch (e) {
