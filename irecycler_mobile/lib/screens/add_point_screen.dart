@@ -47,7 +47,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
         _pickedLocation == null) {
       return;
     }
-    uploadFile();
+    await uploadFile();
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
     final uid = user.uid;
     Place point = Place(
@@ -60,6 +60,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
     point.filled = Random.secure().nextInt(100);
     await fS.addPlace(point);
     //Se guarda en firebase
+    print(point.toMap());
     showDialog<void>(context: context, builder: (context) => myDialog());
   }
 
@@ -71,10 +72,10 @@ class _AddPointScreenState extends State<AddPointScreen> {
     await uploadTask.onComplete;
     print('File Uploaded');
     storageReference.getDownloadURL().then((fileURL) {
-      //setState(() {
+      setState(() {
         _uploadedFileURL = fileURL;
         print(fileURL);
-      //});
+      });
     });
   }
 
