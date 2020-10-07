@@ -221,12 +221,32 @@ class _AddPointScreenState extends State<AddPointScreen> {
 
   Widget _savePoint() {
     return Container(
-      child: RaisedButton(
-        color: Colors.indigo,
-        child: Text('Agregar punto'),
+      child: RaisedButton.icon(
+        icon: Icon(Icons.add_circle_sharp),
+        color: Colors.pink[400],
+        label: Text('Agregar punto'),
         textColor: Colors.white,
-        onPressed: () => {_savePlace()},
+        onPressed: ()  {
+          _savePlace();
+          showDialog<void>(context: context, builder: (context) => myDialog());
+          
+        },
       ),
     );
   }
+
+  Widget myDialog() {
+    return AlertDialog(
+      title: Text('Punto agregado exitosamente'),
+      content:
+          Text(''),
+      actions: [
+        FlatButton(
+          onPressed: () => Navigator.pushNamed(context, AddPointScreen.routeName),
+          child: Text('Aceptar'),
+        )
+      ],
+    );
+  }
+
 }
