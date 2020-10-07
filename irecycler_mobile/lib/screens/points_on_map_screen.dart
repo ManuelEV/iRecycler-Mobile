@@ -28,7 +28,7 @@ class _PointOnMapScreenState extends State<PointOnMapScreen> {
       _markers.clear();
       for (final point in pointsResults) {
         print('Punto X:' + point.toString());
-        final marker = Marker(
+        var marker = Marker(
           markerId: MarkerId(point.title),
           position: LatLng(point.location.latitude, point.location.longitude),
           infoWindow: InfoWindow(
@@ -36,7 +36,7 @@ class _PointOnMapScreenState extends State<PointOnMapScreen> {
             //snippet: point.address,
           ),
         );
-        _markers[point.location.longitude.toString()] = marker;
+        _markers[point.title] = marker;
         print('size:' + _markers.length.toString());
       }
     });
