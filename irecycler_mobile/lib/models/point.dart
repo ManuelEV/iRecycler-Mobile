@@ -16,8 +16,13 @@ class PlaceLocation {
   static PlaceLocation fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return PlaceLocation(latitude: map['latitude'],longitude: map['longitude']
-    );
+    return PlaceLocation(
+        latitude: map['latitude'], longitude: map['longitude']);
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
   }
 }
 
@@ -55,16 +60,21 @@ class Place {
 
   static Place fromMap(Map<String, dynamic> map, String documentId) {
     if (map == null) return null;
-
     return Place(
       title: map['title'],
       image: map['image'],
       description: map['description'],
       filled: map['filled'],
-      location: map['location'],
+      location:
+          PlaceLocation.fromMap(Map<String, dynamic>.from(map['location'])),
       id: map['placeId'],
       userId: map['userId'],
       documentId: documentId,
     );
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
   }
 }
