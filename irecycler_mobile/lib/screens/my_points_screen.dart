@@ -41,7 +41,6 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     String uid = user.uid;
     var placesByUser = await fS.getPlacesByUser(uid);
-    print(placesByUser);
     return placesByUser;
   }
 
