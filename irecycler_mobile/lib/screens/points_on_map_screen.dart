@@ -20,33 +20,33 @@ class PointOnMapScreen extends StatefulWidget {
 
 class _PointOnMapScreenState extends State<PointOnMapScreen> {
   FirestoreService fS = FirestoreService();
-  List<Place> _points;
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  final Map<String, Marker> _markers = {};
 
-  Future fetchPoints() async {
-    var pointsResults = await fS.getPlacesOnceOff();
-    print(pointsResults);
-    if (pointsResults is List<Place>) {
-      _points = pointsResults;
-      //notifyListeners();
-    } else {
-      print('error');
-    }
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    final pointsResults = await fS.getPlacesOnceOff();
+    setState(() {
+      _markers.clear();
+      for (final point in pointsResults) {
+        print('Punto X:' + point.toString());
+        final marker = Marker(
+          markerId: MarkerId(point.title),
+          position: LatLng(point.location.latitude, point.location.longitude),
+          infoWindow: InfoWindow(
+            title: point.title,
+            //snippet: point.address,
+          ),
+        );
+        _markers[point.location.longitude.toString()] = marker;
+        print('size:' + _markers.length.toString());
+      }
+    });
   }
-
-  populateMap() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Puntos en el mapa'),
-        elevation: 0.0,
-        actions: [
-          FloatingActionButton(
-            onPressed: () => {fetchPoints(), print(_points)},
-          ),
-        ],
+        title: const Text('Mis puntos'),
       ),
       drawer: DrawerPage(),
       body: GoogleMap(
@@ -55,19 +55,11 @@ class _PointOnMapScreenState extends State<PointOnMapScreen> {
               widget.initialLocation.longitude),
           zoom: 13,
         ),
+        onMapCreated: _onMapCreated,
         //myLocationButtonEnabled: true,
         myLocationEnabled: true,
-        markers: Set<Marker>.of(markers.values),
-        onMapCreated: (GoogleMapController controller) {},
-        onTap: null,
+        markers: _markers.values.toSet(),
       ),
     );
   }
 }
-/*  void _getPoint(){
-    var points = fS.getPlacesOnceOff();
-    if(docs.documents.isNotEmpty){
-      for(int i= 0; i < docs.documents.length; i++) {
-        initMarker(docs.documents[i].data, docs.documents[i].documentID);
-      }
-    }} */
