@@ -79,4 +79,23 @@ class FirestoreService {
       return e.toString();
     }
   }
+
+  Future getPlacesByUser(String userId) async {
+    try {
+      var pointDocumentSnapshot = await _pointsCollectionReference.where('userId', isEqualTo: userId).getDocuments();
+      if (pointDocumentSnapshot.documents.isNotEmpty) {
+        return pointDocumentSnapshot.documents
+            .map((snapshot) => Place.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.title != null)
+            .toList();
+      }
+    } catch (e) {
+      // TODO: Find or create a way to repeat error handling without so much repeated code
+      if (e is PlatformException) {
+        return e.message;
+      }
+
+      return e.toString();
+    }
+  }
 }
