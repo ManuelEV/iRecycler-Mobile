@@ -4,13 +4,21 @@ import 'package:irecycler_mobile/models/point.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'drawer_page.dart';
 
-class PointOnMapScreen extends StatelessWidget {
-  static const routeName = '/points-on-map';
-  final PlaceLocation initialLocation;
+class PointOnMapScreen extends StatefulWidget {
   PointOnMapScreen({
     this.initialLocation =
         const PlaceLocation(latitude: -38.73965, longitude: -72.59842),
   });
+
+  static const routeName = '/points-on-map';
+  final PlaceLocation initialLocation;
+
+  @override
+  _PointOnMapScreenState createState() => _PointOnMapScreenState();
+}
+
+class _PointOnMapScreenState extends State<PointOnMapScreen> {
+  Map<Marker, MarkerId> marker = <Marker, MarkerId>{};
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +30,8 @@ class PointOnMapScreen extends StatelessWidget {
       drawer: DrawerPage(),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: LatLng(initialLocation.latitude, initialLocation.longitude),
+          target: LatLng(widget.initialLocation.latitude,
+              widget.initialLocation.longitude),
           zoom: 13,
         ),
         //myLocationButtonEnabled: true,
