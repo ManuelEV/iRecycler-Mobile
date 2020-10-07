@@ -57,7 +57,12 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
   @override
   Widget build(BuildContext context) {
     if (_points == null) {
-      return Scaffold(appBar: AppBar());
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Mis puntos de reciclaje'),
+          ),
+          drawer: DrawerPage(),
+          body: Text('No tiene puntos registrados'));
     }
     return Scaffold(
       appBar: AppBar(
