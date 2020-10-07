@@ -50,6 +50,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
     await uploadFile();
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
     final uid = user.uid;
+    print(_uploadedFileURL);
     Place point = Place(
       description: _pointDescription.text,
       title: _pointName.text,
@@ -71,10 +72,9 @@ class _AddPointScreenState extends State<AddPointScreen> {
     StorageUploadTask uploadTask = storageReference.putFile(_pointImage);
     await uploadTask.onComplete;
     print('File Uploaded');
-    storageReference.getDownloadURL().then((fileURL) {
+    await storageReference.getDownloadURL().then((fileURL) {
       setState(() {
         _uploadedFileURL = fileURL;
-        print(fileURL);
       });
     });
   }
