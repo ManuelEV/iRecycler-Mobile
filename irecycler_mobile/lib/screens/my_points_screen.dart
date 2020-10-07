@@ -62,24 +62,24 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
             title: Text('Mis puntos de reciclaje'),
           ),
           drawer: DrawerPage(),
-          body: Text('No tiene puntos registrados'));
+          body: 
+          Column(
+      children: <Widget>[
+        Center(
+          child: Container(
+          padding: EdgeInsets.all(100.0),
+          child: Text('Usted aún no tiene puntos registrados.', style: TextStyle(
+            fontWeight: FontWeight.bold,
+            height: 2.0,
+            )),
+        )
+        )
+      ],
+    )
+          );
     }
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          DropdownButton(
-            items: <String>['1 Mes', '6 Meses', '1 Año', '5 Años']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String newValue) {
-              setState(() {});
-            },
-          )
-        ],
         title: Text('Mis puntos de reciclaje'),
       ),
       drawer: DrawerPage(),
