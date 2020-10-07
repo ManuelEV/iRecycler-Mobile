@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:irecycler_mobile/models/point.dart';
 import 'dart:io';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:irecycler_mobile/models/user.dart';
 import 'package:irecycler_mobile/screens/drawer_page.dart';
+import 'package:irecycler_mobile/services/auth.dart';
+import 'package:irecycler_mobile/services/points_service.dart';
 import 'package:irecycler_mobile/widgets/graph_widget.dart';
 
 class MyPointsScreen extends StatefulWidget {
@@ -12,10 +16,13 @@ class MyPointsScreen extends StatefulWidget {
 }
 
 class _MyPointsScreenState extends State<MyPointsScreen> {
-  List<charts.Series<LinearSales, String>> _createSampleData() {
+  FirestoreService fS = FirestoreService();
+  List<Place> _points;
+
+  List<charts.Series<LinearSales, String>> _createSampleData(int fill) {
     final data = [
-      new LinearSales("Lleno", 75),
-      new LinearSales("Vacio", 25),
+      new LinearSales("Lleno", fill),
+      new LinearSales("Vacio", 100 - fill),
     ];
 
     return [
@@ -30,63 +37,65 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
     ];
   }
 
-  final List<Place> points = [
-    Place(
-      id: '1',
-      title: 'Punto 1',
-      description: 'adsdasdasd',
-      location: PlaceLocation(longitude: 3.123, latitude: 22.33),
-      filled: 50,
-    ),
-    Place(
-      id: '2',
-      title: 'Punto 2',
-      filled: 75,
-      description: 'adsdasdasd',
-      location: PlaceLocation(longitude: 3.123, latitude: 22.33),
-    ),
-    Place(
-        id: '3',
-        title: 'Punto 3',
-        filled: 89,
-        description: 'adsdasdasd',
-        location: PlaceLocation(longitude: 3.123, latitude: 22.33)),
-  ];
+  Future<List<Place>> getPointsData() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    String uid = user.uid;
+    var placesByUser = await fS.getPlacesByUser(uid);
+    return placesByUser;
+  }
+
+  @override
+  void initState() {
+    getPointsData().then((value) {
+      setState(() {
+        _points = value;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_points == null) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Text('Mis puntos de reciclaje'),
+          ),
+          drawer: DrawerPage(),
+          body: 
+          Column(
+      children: <Widget>[
+        Center(
+          child: Container(
+          padding: EdgeInsets.all(100.0),
+          child: Text('Usted aún no tiene puntos registrados.', style: TextStyle(
+            fontWeight: FontWeight.bold,
+            height: 2.0,
+            )),
+        )
+        )
+      ],
+    )
+          );
+    }
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          DropdownButton(
-            items: <String>['1 Mes', '6 Meses', '1 Año', '5 Años']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String newValue) {
-              setState(() {});
-            },
-          )
-        ],
         title: Text('Mis puntos de reciclaje'),
       ),
       drawer: DrawerPage(),
       body: ListView.builder(
-        itemCount: this.points.length,
+        itemCount: this._points.length,
         itemBuilder: (context, index) {
           return Container(
             height: 500,
             child: Card(
               child: Column(
                 children: <Widget>[
-                  Text(this.points[index].title),
+                  Text(this._points[index].title),
                   Container(
                     width: 300,
                     height: 400,
                     child: DonutAutoLabelChart(
-                      this._createSampleData(),
+                      this._createSampleData(_points[index].filled),
                       animate: true,
                     ),
                   ),

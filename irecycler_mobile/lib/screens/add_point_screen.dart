@@ -60,6 +60,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
     point.filled = Random.secure().nextInt(100);
     fS.addPlace(point);
     //Se guarda en firebase
+    showDialog<void>(context: context, builder: (context) => myDialog());
   }
 
   Future uploadFile() async {
@@ -228,8 +229,6 @@ class _AddPointScreenState extends State<AddPointScreen> {
         textColor: Colors.white,
         onPressed: ()  {
           _savePlace();
-          showDialog<void>(context: context, builder: (context) => myDialog());
-          
         },
       ),
     );
