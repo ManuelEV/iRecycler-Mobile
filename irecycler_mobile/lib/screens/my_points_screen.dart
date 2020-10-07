@@ -57,7 +57,7 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
   @override
   Widget build(BuildContext context) {
     if (_points == null) {
-      return new Container();
+      return Scaffold(appBar: AppBar());
     }
     return Scaffold(
       appBar: AppBar(
