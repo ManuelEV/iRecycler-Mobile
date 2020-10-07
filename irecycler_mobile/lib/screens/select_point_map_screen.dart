@@ -22,12 +22,40 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   LatLng _pickedLocation;
   FirestoreService fS = FirestoreService();
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+  final Map<String, Marker> _markers = {};
 
   void _selectLocation(LatLng position) {
     setState(() {
       _pickedLocation = position;
     });
+  }
+
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    final pointsResults = await fS.getPlacesOnceOff();
+    setState(() {
+      _markers.clear();
+      for (final point in pointsResults) {
+        print('Punto X:' + point.toString());
+        var marker = Marker(
+          markerId: MarkerId(point.title),
+          position: LatLng(point.location.latitude, point.location.longitude),
+          infoWindow: InfoWindow(
+            title: point.title,
+            snippet: 'Capacidad disponible: ' + (100 - point.filled).toString(),
+          ),
+        );
+        _markers[point.title] = marker;
+        print('size:' + _markers.length.toString());
+      }
+    });
+  }
+
+  Map<String, Marker> _addMarker() {
+    setState(() {
+      _markers['New Marker'] =
+          Marker(markerId: MarkerId('m1'), position: _pickedLocation);
+    });
+    return _markers;
   }
 
   @override
@@ -42,29 +70,24 @@ class _MapScreenState extends State<MapScreen> {
               icon: Icon(Icons.check),
               onPressed: _pickedLocation == null
                   ? null
-                  : () {
-                      Navigator.of(context).pop(_pickedLocation);
-                    },
+                  : () => {Navigator.of(context).pop(_pickedLocation)},
             ),
         ],
       ),
       drawer: DrawerPage(),
       body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: LatLng(widget.initialLocation.latitude,
-              widget.initialLocation.longitude),
-          zoom: 13,
-        ),
-        //myLocationButtonEnabled: true,
-
-        myLocationEnabled: true,
-        onTap: widget.isSelecting ? _selectLocation : null,
-        markers: _pickedLocation == null
-            ? null
-            : {
-                Marker(markerId: MarkerId('m1'), position: _pickedLocation),
-              },
-      ),
+          initialCameraPosition: CameraPosition(
+            target: LatLng(widget.initialLocation.latitude,
+                widget.initialLocation.longitude),
+            zoom: 13,
+          ),
+          //myLocationButtonEnabled: true,
+          onMapCreated: _onMapCreated,
+          myLocationEnabled: true,
+          onTap: widget.isSelecting ? _selectLocation : null,
+          markers: _pickedLocation == null
+              ? _markers.values.toSet()
+              : _addMarker().values.toSet()),
     );
   }
 }

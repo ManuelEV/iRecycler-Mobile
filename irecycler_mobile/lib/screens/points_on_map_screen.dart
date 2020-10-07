@@ -33,7 +33,7 @@ class _PointOnMapScreenState extends State<PointOnMapScreen> {
           position: LatLng(point.location.latitude, point.location.longitude),
           infoWindow: InfoWindow(
             title: point.title,
-            //snippet: point.address,
+            snippet: 'Capacidad disponible: ' + (100 - point.filled).toString(),
           ),
         );
         _markers[point.title] = marker;
@@ -47,6 +47,7 @@ class _PointOnMapScreenState extends State<PointOnMapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mis puntos'),
+        actions: [],
       ),
       drawer: DrawerPage(),
       body: GoogleMap(
