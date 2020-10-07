@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
     return loading ? Loading() : Scaffold(
       //backgroundColor: Colors.brown[100],
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
+      appBar: new AppBar(
         elevation: 0.0,
         title: Text('Regístrate en iRecycler'),
         actions: <Widget>[

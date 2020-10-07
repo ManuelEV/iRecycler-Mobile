@@ -27,7 +27,7 @@ class _SignInState extends State<SignIn> {
         ? Loading()
         : Scaffold(
             resizeToAvoidBottomPadding: false,
-            appBar: AppBar(
+            appBar: new AppBar(
               elevation: 0.0,
               title: Text('Ingresa a iRecycler'),
               actions: <Widget>[

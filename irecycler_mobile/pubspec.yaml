@@ -75,6 +75,7 @@ flutter:
    - assets/images/recycle/recycling.svg
    #GIFS
    - assets/images/not-found.gif
+   - assets/images/loading.gif
 
   #   - images/a_dot_ham.jpeg
 

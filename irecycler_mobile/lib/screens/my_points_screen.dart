@@ -82,12 +82,13 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
       appBar: AppBar(
         title: Text('Mis puntos de reciclaje'),
       ),
+      resizeToAvoidBottomPadding: false,
       drawer: DrawerPage(),
       body: ListView.builder(
         itemCount: this._points.length,
         itemBuilder: (context, index) {
           return Container(
-            height: 500,
+            height: 800,
             child: Card(
               child: Column(
                 children: <Widget>[
@@ -95,14 +96,18 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
                   ),
                   Divider(),
                   Text(this._points[index].description),
+                  Divider(),
+                  _tarjetaImg(this._points[index].image),
+                  Divider(),
                   Container(
                     width: 300,
-                    height: 400,
+                    height: 250,
                     child: DonutAutoLabelChart(
                       this._createSampleData(_points[index].filled),
                       animate: true,
                     ),
                   ),
+                  Divider(),
                 ],
               ),
             ),
@@ -111,6 +116,31 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
       ),
     );
   }
+
+  Widget _tarjetaImg(String img){
+    if (img == null){
+      return Container();
+    }else{
+      return Card(
+        child: Column(
+          children: <Widget>[
+            FadeInImage(
+              placeholder: AssetImage('assets/images/loading.gif'),
+              image: NetworkImage('$img'),
+              height: 250.0,
+              fit: BoxFit.cover,
+            ),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text('Foto del contenedor'),
+            )
+          ],
+        ),
+      );
+    }
+    
+  }
+
 }
 
 /// Sample linear data type.
