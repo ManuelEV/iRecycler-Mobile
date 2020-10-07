@@ -50,7 +50,6 @@ class _AddPointScreenState extends State<AddPointScreen> {
     uploadFile();
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
     final uid = user.uid;
-    print('1');
     Place point = Place(
       description: _pointDescription.text,
       title: _pointName.text,
@@ -58,9 +57,7 @@ class _AddPointScreenState extends State<AddPointScreen> {
       image: _uploadedFileURL,
       userId: uid
     );
-    print('2');
     point.filled = Random.secure().nextInt(100);
-    print('3');
     fS.addPlace(point);
     //Se guarda en firebase
     showDialog<void>(context: context, builder: (context) => myDialog());
