@@ -64,15 +64,16 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
           body: 
           Column(
       children: <Widget>[
-        Center(
-          child: Container(
-          padding: EdgeInsets.all(100.0),
-          child: Text('Usted aún no tiene puntos registrados.', style: TextStyle(
-            fontWeight: FontWeight.bold,
-            height: 2.0,
-            )),
-        )
-        )
+        
+        Container(
+          padding: EdgeInsets.all(50.0),
+          child: Text('Usted aún no tiene puntos registrados'),
+        ),
+        Image(
+          image: AssetImage('assets/images/not-found.gif'),
+          height: 250.0,
+          fit: BoxFit.cover,
+        ),
       ],
     )
           );
@@ -90,7 +91,10 @@ class _MyPointsScreenState extends State<MyPointsScreen> {
             child: Card(
               child: Column(
                 children: <Widget>[
-                  Text(this._points[index].title),
+                  Text(this._points[index].title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)
+                  ),
+                  Divider(),
+                  Text(this._points[index].description),
                   Container(
                     width: 300,
                     height: 400,

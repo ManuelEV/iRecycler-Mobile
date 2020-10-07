@@ -73,6 +73,8 @@ flutter:
    #RECYCLE
    - assets/images/recycle/recycle.svg
    - assets/images/recycle/recycling.svg
+   #GIFS
+   - assets/images/not-found.gif
 
   #   - images/a_dot_ham.jpeg
 
