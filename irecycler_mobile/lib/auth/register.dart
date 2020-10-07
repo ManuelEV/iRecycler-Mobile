@@ -28,6 +28,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
       //backgroundColor: Colors.brown[100],
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         elevation: 0.0,
         title: Text('Regístrate en iRecycler'),
